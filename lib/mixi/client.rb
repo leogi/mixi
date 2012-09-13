@@ -7,6 +7,10 @@
  
  require "mixi/connection"
  require "mixi/people"
+ require "mixi/group"
+ require "mixi/people_search"
+ require "mixi/update"
+ require "mixi/message"
  module Mixi
    # Your code goes here...
    class Client
@@ -70,11 +74,11 @@
      end
      
      def parse http_response
-       results = []
+       results = Hash.new
        if http_response.class == Net::HTTPOK
          results = JSON.parse(http_response.body)
        else
-         results["error"] = "#{http_response.class}"
+         results["error"] = http_response.class.name
        end
        results
      end

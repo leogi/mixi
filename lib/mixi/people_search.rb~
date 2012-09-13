@@ -1,0 +1,12 @@
+module Mixi
+  class Client
+    PEOPLE_ENDPOINT_SEARCH = "/2/search/people/"
+
+    # group_id: mixi group id or "@friends" or "@all", default is "@friends"
+    def search group_id="@friends", email
+
+
+    end
+
+  end
+end

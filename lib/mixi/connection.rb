@@ -39,17 +39,53 @@ module Mixi
 
     end 
 
+    def delete endpoint
+
+      http = Net::HTTP.new("api.mixi-platform.com", 80)
+      http.start do
+        response = delete_exe(http, endpoint)
+       
+        if response.class == Net::HTTPUnauthorized
+          refresh_token_exe
+          response = delete_exe(http, endpoint)
+        end
+        response
+      end
+
+    end
+
+
+    def put endpoint, params
+
+      http = Net::HTTP.new("api.mixi-platform.com", 80)
+      http.start do
+        response = put_exe(http, endpoint, params)
+       
+        if response.class == Net::HTTPUnauthorized
+          refresh_token_exe
+          response = put_exe(http, endpoint, params)
+        end
+        response
+      end
+
+    end
+
     def post_exe (https, endpoint, params)
-
       https.post(endpoint, params, {'Authorization' => "OAuth #{@token}",'HOST' => 'api.mixi-platform.com'})
-
     end
 
     def get_exe(http, endpoint)
-
       http.get(endpoint, {'Authorization' => "OAuth #{@token}",'HOST' => 'api.mixi-platform.com'})
-
     end
- 
+
+    def delete_exe(http, endpoint)
+      http.delete(endpoint, {'Authorization' => "OAuth #{@token}",'HOST' => 'api.mixi-platform.com'})
+    end
+
+
+    def put_exe(http, endpoint, params)
+      http.put(endpoint, params, {'Authorization' => "OAuth #{@token}",'HOST' => 'api.mixi-platform.com'})
+    end
+
   end
 end
