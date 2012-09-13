@@ -16,4 +16,5 @@ Gem::Specification.new do |gem|
   gem.version       = Mixi::VERSION
 
   gem.add_development_dependency 'rspec'
+
 end
