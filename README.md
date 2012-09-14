@@ -53,12 +53,14 @@ Or install it yourself as:
 
 ## Usage
 
-Initial mixi instance:
+
 
 - CUSTEMER_KEY		: customer key
 - CUSTOMER_SECRET	: customer secret
 - MIXI_TOKEN 	 	: mixi token (obtained by omiauth)
 - MIXI_REFRESH_TOKEN	: mixi refresh token (obtained by omiauth)
+
+Initial mixi instance:
 
     mixi = Mixi::Client.new(CUSTOMER_KEY, CUSTOMER_SECRET, MIXI_TOKEN, MIXI_REFRESH_TOKEN)
 
