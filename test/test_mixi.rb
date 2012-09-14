@@ -8,6 +8,15 @@ class TestMixi < Test::Unit::TestCase
   MIXI_REFRESH_TOKEN="9ba3916ce2d480aacc984fea4ccf292421f5421b"
 
 =begin
+  def test_posting_with_image
+    mixi = Mixi::Client.new(CUSTOMER_KEY, CUSTOMER_SECRET, MIXI_TOKEN, MIXI_REFRESH_TOKEN)
+   
+    data = IO.binread("/home/nghialv/mylove.jpg")
+    results = mixi.posting_with_image("nghia yeu diu", data)
+    puts results
+    assert_not_equal true, results.has_key?("error")
+  end
+
   def test_change_setting_profile_image # test fails
     mixi = Mixi::Client.new(CUSTOMER_KEY, CUSTOMER_SECRET, MIXI_TOKEN, MIXI_REFRESH_TOKEN)
     #results = mixi.profile_images

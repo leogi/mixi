@@ -50,6 +50,14 @@ module Mixi
        parse(response)
     end
 
+    # post a voice with image
+    def posting_with_image status, data
+      endpoint = "/2/voice/statuses/update?status=#{status}"
+      response = post_binary(endpoint, data)
+      parse(response)
+
+    end
+
     # delete a voice post
     def delete_post post_id
       endpoint = "/2/voice/statuses/destroy/#{post_id}"
