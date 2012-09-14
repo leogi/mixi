@@ -11,6 +11,9 @@
  require "mixi/people_search"
  require "mixi/update"
  require "mixi/message"
+ require "mixi/voice"
+ require "mixi/photo"
+ require "mixi/profile_image"
  module Mixi
    # Your code goes here...
    class Client
@@ -30,7 +33,7 @@
        @customer_secret = customer_secret
        @token = mixi_token
        @refresh_token = mixi_refresh_token
-      @errors = []
+       @errors = []
      end
      
      # refresh token
@@ -65,17 +68,9 @@
      #  parse(response)
      #end
      
-     # update status
-     def update_status status
-       endpoint = "/2/voice/statuses/update"
-       params = "status=#{status}"
-       response = post(endpoint, params)
-       parse(response)
-     end
-     
      def parse http_response
        results = Hash.new
-       if http_response.class == Net::HTTPOK
+       if http_response.class == Net::HTTPOK || http_response.class == Net::HTTPCreated
          results = JSON.parse(http_response.body)
        else
          results["error"] = http_response.class.name

@@ -44,21 +44,34 @@ module Mixi
     end
 
     # send message
+    # recipients : recipient user id
+    # title
+    # content
+    # mixi.send("yce3fctj9i","test", "test")
     def send recipients, title, content
+
       endpoint = MESSAGE_ENDPOINT + "@me/@self/@outbox"
-      params= "title=#{title}&body=#{content}&recipients=#{recipients}"
-      response = post(endpoint, params)
+      data = {title: title, body: content, recipients: [recipients] }.to_json
+      response = post_json(endpoint, data)
       parse(response)
+
     end
 
     # change inbox state
-    def inbox_state
-
+    # status: read or replied
+    def inbox_state message_id, status = "read"
+      endpoint = MESSAGE_ENDPOINT + "@me/@self/@inbox/#{message_id}"
+      data = { status: status }.to_json
+      response = put_json(endpoint, data)
+      parse(response)
     end
     
     # change notice state
-    def notice_state
-
+    def notice_state message_id
+      endpoint = MESSAGE_ENDPOINT + "@me/@self/@noticebox/#{message_id}"
+      data = { status: "read" }.to_json
+      response = put_json(endpoint, data)
+      parse(response)
     end
 
     # delete message
