@@ -53,7 +53,20 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+create mixi instance
+CUSTEMER_KEY		: customer key
+CUSTOMER_SECRET	        : customer secret
+MIXI_TOKEN 	 	: mixi token (obtained by omiauth)
+MIXI_REFRESH_TOKEN	: mixi refresh token (obtained by omiauth)
+
+mixi = Mixi::Client.new(CUSTOMER_KEY, CUSTOMER_SECRET, MIXI_TOKEN, MIXI_REFRESH_TOKEN)
+
+#extracting the list of friend      
+results = mixi.friends
+
+# create a mixi voice post with a photo
+data = IO.binread("path to photo")
+results = mixi.posting_with_photo("status", data)
 
 ## Contributing
 
